@@ -99,6 +99,9 @@ class TestPromailgateClient(TestCase):
         unknown_error_message_id = 'some-other-error'
 
         def mocked_requests_get(*args, **kwargs):
+            if 'verify_ssl' in kwargs:
+                verify_ssl = kwargs['verify_ssl']
+
             class MockResponse:
                 def __init__(self, json_data, status_code):
                     self.json_data = json_data
@@ -125,27 +128,51 @@ class TestPromailgateClient(TestCase):
             else:
                 raise Exception('Unknown endpoint')
 
-        with mock.patch('requests.get', side_effect=mocked_requests_get):
-            # Test http endpoint
-            client = PromailgateClient(
-                host=test_hostname,
-                use_ssl=False,
-                verify_ssl=True,
-                default_api_key=None
-            )
 
+        # Test http endpoint
+        client = PromailgateClient(
+            host=test_hostname,
+            use_ssl=False,
+            verify_ssl=True,
+            default_api_key=None
+        )
+        with mock.patch('requests.get', side_effect=mocked_requests_get) as mocked_request:
             test_status = client.get_message_status(http_working_message_id)
             self.assertEqual(test_status, http_message_status)
-
-            client = PromailgateClient(
-                host=test_hostname,
-                use_ssl=True,
-                verify_ssl=True,
-                default_api_key=None
+            mocked_request.assert_called_once_with(
+                'http://%s/api/message/status/%s' % (test_hostname, http_working_message_id),
+                headers={'Content-type': 'application/json'}, verify=True
             )
 
+        # Check SSL no-verify
+        client = PromailgateClient(
+            host=test_hostname,
+            use_ssl=True,
+            verify_ssl=False,
+            default_api_key=None
+        )
+        with mock.patch('requests.get', side_effect=mocked_requests_get) as mocked_request:
             test_status = client.get_message_status(https_working_message_id)
             self.assertEqual(test_status, https_message_status)
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/status/%s' % (test_hostname, https_working_message_id),
+                headers={'Content-type': 'application/json'}, verify=False
+            )
+
+        client = PromailgateClient(
+            host=test_hostname,
+            use_ssl=True,
+            verify_ssl=True,
+            default_api_key=None
+        )
+
+        with mock.patch('requests.get', side_effect=mocked_requests_get) as mocked_request:
+            test_status = client.get_message_status(https_working_message_id)
+            self.assertEqual(test_status, https_message_status)
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/status/%s' % (test_hostname, https_working_message_id),
+                 headers={'Content-type': 'application/json'}, verify=True
+            )
 
             # Check error cases
             #  - Unknown message
