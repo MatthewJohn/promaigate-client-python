@@ -36,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="358" selection-start-line="358" selection-end-line="358" />
+            <state relative-caret-position="452">
+              <caret line="344" column="27" selection-start-line="344" selection-start-column="27" selection-end-line="344" selection-end-column="27" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
                 <element signature="e#515#996#0" />
@@ -375,8 +375,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="358" selection-start-line="358" selection-end-line="358" />
+        <state relative-caret-position="452">
+          <caret line="344" column="27" selection-start-line="344" selection-start-column="27" selection-end-line="344" selection-end-column="27" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
             <element signature="e#515#996#0" />

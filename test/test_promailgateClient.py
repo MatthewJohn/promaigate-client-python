@@ -329,6 +329,22 @@ class TestPromailgateClient(TestCase):
                  "data": test_message_data_1, "return_id": False}
             )
 
+        # Test without data parameter
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            send_r = client.send_email(recipient=test_recipient_1, return_id=False,
+                                       api_key=test_valid_api_key_1)
+            self.assertEqual(send_r, True)
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/send' % test_hostname,
+                data=mock.ANY,
+                headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
+            )
+
         # Test no API key provided
         client = PromailgateClient(
             host=test_hostname,
