@@ -36,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="172" column="22" selection-start-line="172" selection-start-column="22" selection-end-line="172" selection-end-column="22" />
+            <state relative-caret-position="662">
+              <caret line="178" column="31" lean-forward="true" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -355,8 +355,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="172" column="22" selection-start-line="172" selection-start-column="22" selection-end-line="172" selection-end-column="22" />
+        <state relative-caret-position="662">
+          <caret line="178" column="31" lean-forward="true" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
         </state>
       </provider>
     </entry>

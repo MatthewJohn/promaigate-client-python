@@ -159,6 +159,7 @@ class TestPromailgateClient(TestCase):
                 headers={'Content-type': 'application/json'}, verify=False
             )
 
+        # Check HTTPS endpoint
         client = PromailgateClient(
             host=test_hostname,
             use_ssl=True,
@@ -174,6 +175,7 @@ class TestPromailgateClient(TestCase):
                  headers={'Content-type': 'application/json'}, verify=True
             )
 
+        with mock.patch('requests.get', side_effect=mocked_requests_get) as mocked_request:
             # Check error cases
             #  - Unknown message
             with self.assertRaises(promailgate_client.errors.NoSuchMessageError):
