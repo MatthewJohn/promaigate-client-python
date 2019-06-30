@@ -23,13 +23,17 @@ class PromailgateClient(object):
         self._verify_ssl = verify_ssl
         self._default_api_key = default_api_key
 
+    def _get_promailgate_host(self):
+        """Obtain hostname of promailgate host"""
+        return self._promailgate_host
+
     def _get_proto(self):
         """Obtain protocol for connection"""
         return 'https' if self._use_ssl else 'http'
 
     def _get_base_url(self):
         """Return base URL of the endpoint"""
-        return '%s://%s' % (self._get_proto(), self._promailgate_host)
+        return '%s://%s' % (self._get_proto(), self._get_promailgate_host())
 
     def send_email(self, recipient, api_key=None, data=None, return_id=True):
         """Send an email using the API."""
