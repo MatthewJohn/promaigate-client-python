@@ -24,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="124" column="26" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+            <state relative-caret-position="65">
+              <caret line="97" column="26" lean-forward="true" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
               </folding>
@@ -36,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="384" column="30" selection-start-line="384" selection-start-column="30" selection-end-line="384" selection-end-column="30" />
+            <state relative-caret-position="215">
+              <caret line="342" column="70" selection-start-line="342" selection-start-column="70" selection-end-line="342" selection-end-column="70" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
                 <element signature="e#515#996#0" />
@@ -85,6 +85,11 @@
       <find>verify</find>
       <find>request</find>
       <find>test_serber_errr</find>
+      <find>test_web_server_error_recp</find>
+      <find>message'</find>
+      <find>message</find>
+      <find>web</find>
+      <find>web-</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -372,8 +377,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="124" column="26" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+        <state relative-caret-position="65">
+          <caret line="97" column="26" lean-forward="true" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
           </folding>
@@ -382,8 +387,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="384" column="30" selection-start-line="384" selection-start-column="30" selection-end-line="384" selection-end-column="30" />
+        <state relative-caret-position="215">
+          <caret line="342" column="70" selection-start-line="342" selection-start-column="70" selection-end-line="342" selection-end-column="70" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
             <element signature="e#515#996#0" />

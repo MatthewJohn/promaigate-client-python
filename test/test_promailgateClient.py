@@ -137,7 +137,7 @@ class TestPromailgateClient(TestCase):
                 if loads(kwargs['data'])['recipient'] == test_web_server_error_recp:
                     return MockResponse({
                         'message': 'The browser (or proxy) sent a request that this server could not understand.'},
-                        500
+                        400
                     )
 
                 if loads(kwargs['data'])['recipient'] == test_unknown_response_recp:
@@ -329,26 +329,26 @@ class TestPromailgateClient(TestCase):
         # Test with send error
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
             with self.assertRaises(promailgate_client.errors.SendError):
-                send_r = client.send_email(recipient=test_unsub_recipient, return_id=True,
-                                           data={}, api_key=test_valid_api_key_1)
+                client.send_email(recipient=test_unsub_recipient, return_id=True,
+                                  data={}, api_key=test_valid_api_key_1)
 
         # Test with internal server error
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
             with self.assertRaises(promailgate_client.errors.UnknownSendError):
-                send_r = client.send_email(recipient=test_server_error_recp, return_id=True,
-                                           data={}, api_key=test_valid_api_key_1)
+                client.send_email(recipient=test_server_error_recp, return_id=True,
+                                  data={}, api_key=test_valid_api_key_1)
 
         # Test with internal web-server error
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
-            with self.assertRaises(promailgate_client.errors.UnknownSendError):
-                send_r = client.send_email(recipient=test_web_server_error_recp, return_id=True,
-                                           data={}, api_key=test_valid_api_key_1)
+            with self.assertRaises(promailgate_client.errors.SendError):
+                client.send_email(recipient=test_web_server_error_recp, return_id=True,
+                                  data={}, api_key=test_valid_api_key_1)
 
         # Test with unknown response code
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
             with self.assertRaises(promailgate_client.errors.UnknownResponseError):
-                send_r = client.send_email(recipient=test_unknown_response_recp, return_id=True,
-                                           data={}, api_key=test_valid_api_key_1)
+                client.send_email(recipient=test_unknown_response_recp, return_id=True,
+                                  data={}, api_key=test_valid_api_key_1)
 
         # Test with data
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
