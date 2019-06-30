@@ -56,8 +56,8 @@ class TestPromailgateClient(TestCase):
         with mock.patch.object(client, '_get_url', return_value='override://by.url.param'):
             self.assertEqual(client._get_base_url(), 'override://by.url.param')
 
-    def test__get_promailgate_host(self):
-        """Test _get_promailgate_host method"""
+    def test__get_host(self):
+        """Test _get_host method"""
         client = PromailgateClient(
             host='TestHostnameHere',
             use_ssl=True,
@@ -79,7 +79,7 @@ class TestPromailgateClient(TestCase):
 
         # Test non-SSL connection
         client = PromailgateClient(
-            promailgate_host='Test',
+            host='Test',
             use_ssl=False,
             verify_ssl=True,
             default_api_key=None)
