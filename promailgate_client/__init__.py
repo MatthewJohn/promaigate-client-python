@@ -6,6 +6,8 @@
 from json import dumps
 import requests
 
+from proamilgate_client.errors import *
+
 
 class PromailgateClient(object):
 
@@ -96,58 +98,3 @@ class PromailgateClient(object):
 
         else:
             raise UnknownResponseError('Unknown status code: %s' % status_r.status_code)
-
-
-
-class PromailgateClientException(Exception):
-    """Base exception for client"""
-
-    pass
-
-
-class NoApiKeyProvidedError(PromailgateClientException):
-    """No API key has been prodided"""
-
-    pass
-
-
-class NoRecipientProvidedError(PromailgateClientException):
-    """No recipient has been provided for the email"""
-
-    pass
-
-
-class InvalidAPIKeyError(PromailgateClientException):
-    """Invalid API key"""
-
-    pass
-
-
-class UnknownResponseError(PromailgateClientException):
-    """Unknown status code returned by server"""
-
-    pass
-
-
-class SendError(PromailgateClientException):
-    """Error during send"""
-
-    pass
-
-
-class UnknownSendError(PromailgateClientException):
-    """Unknown server error during send"""
-
-    pass
-
-
-class NoSuchMessageError(PromailgateClientException):
-    """No such message"""
-
-    pass
-
-
-class UnknownServerError(PromailgateClientException):
-    """Unknown server error"""
-
-    pass
