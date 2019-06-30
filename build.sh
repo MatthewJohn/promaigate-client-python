@@ -4,6 +4,7 @@ set -e
 set -x
 
 devpi_server=http://fare-docker-reg.dock.studios:3141
+export PIP_CONFIG_FILE=./.pip.conf
 
 for py_ver in 2 3
 do
