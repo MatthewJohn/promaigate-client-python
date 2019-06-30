@@ -1,4 +1,3 @@
 #!/bin/bash
 
-rm -rf build-env
-rm -rf build
+rm -rf build-env build *.egg-info
