@@ -81,7 +81,7 @@ class PromailgateClient(object):
         # Check for errors
         if send_r.status_code == 401:
             # API key invalid
-            promailgate_client.errors.InvalidAPIKeyError('Invalid API key')
+            raise promailgate_client.errors.InvalidAPIKeyError('Invalid API key')
         elif send_r.status_code == 400:
             # Send Error
             error = 'No error provided'

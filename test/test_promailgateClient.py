@@ -90,6 +90,7 @@ class TestPromailgateClient(TestCase):
         test_valid_api_key_1 = '1234567890'
         test_valid_api_key_2 = '0987654321'
         test_valid_api_key_3 = 'asdfghjkl'
+        invalid_api_key = 'invalid-key-here'
         test_recipient_1 = 'alice@example.com'
         test_recipient_2 = 'bob@examples.co.uk'
         test_unsub_recipient = 'unsubby@example.com'
@@ -119,6 +120,9 @@ class TestPromailgateClient(TestCase):
             self.assertTrue('return_id' in kwargs['data'])
             self.assertTrue('recipient' in kwargs['data'])
             self.assertTrue('api_key' in kwargs['data'])
+
+            if loads(kwargs['data'])['api_key'] == invalid_api_key:
+                return MockResponse({'status': 'Error', 'Reason': 'Invalid API Key'}, 401)
 
             if args[0] in ['http://%s/api/message/send' % test_hostname,
                            'https://%s/api/message/send' % test_hostname,
@@ -342,6 +346,23 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(
                 loads(mocked_request.call_args[1]['data']),
                 {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
+            )
+
+        # Test invalid API key
+
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            with self.assertRaises(promailgate_client.errors.InvalidAPIKeyError):
+                client.send_email(recipient=test_recipient_1, return_id=False,
+                                  api_key=invalid_api_key, data={})
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/send' % test_hostname,
+                data=mock.ANY,
+                headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": invalid_api_key, "recipient": test_recipient_1,
                  "data": {}, "return_id": False}
             )
 
