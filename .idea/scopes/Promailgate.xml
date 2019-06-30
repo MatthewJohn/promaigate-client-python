@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Promailgate" pattern="file[promailgate-python-client]:*.py" />
+</component>
