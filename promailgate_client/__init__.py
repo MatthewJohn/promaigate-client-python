@@ -1,3 +1,5 @@
+"""Proamilgate send API client"""
+
 #  Copyright (C) Mike Norton, Matt Comben - All Rights Reserved
 #  This file is part of ProMailGate.
 #  Unauthorized copying of this file, via any medium is strictly prohibited
@@ -11,6 +13,7 @@ import promailgate_client.errors
 
 
 class PromailgateClient(object):
+    """Send client for Promailgate"""
 
     def __init__(
             self,
@@ -78,28 +81,40 @@ class PromailgateClient(object):
             verify=self._verify_ssl
         )
 
+        # Return successful
+        if send_r.status_code == 201:
+            # Return message ID if server provides this (based on return_id parameter)
+            return send_r.json()['message_id']
+        elif send_r.status_code == 200:
+            # Otherwise, return True
+            return True
+
         # Check for errors
-        if send_r.status_code == 401:
+        elif send_r.status_code == 401:
             # API key invalid
             raise promailgate_client.errors.InvalidAPIKeyError('Invalid API key')
+
+        # Handle send error
         elif send_r.status_code == 400:
-            # Send Error
             error = 'No error provided'
+
+            # If possible, obtain error from promailgate
             if 'Reason' in send_r.json():
                 error = send_r.json()['Reason']
+
+            # Otherwise, handle error from promailgate web server
             elif 'message' in send_r.json():
                 error = send_r.json()['message']
+
+            # Raise exception containing error
             raise promailgate_client.errors.SendError('Send error: %s' % error)
 
         elif send_r.status_code == 500:
             # Unknown server error
             raise promailgate_client.errors.UnknownSendError('Internal server error')
 
-        if send_r.status_code == 201:
-            return send_r.json()['message_id']
-        elif send_r.status_code == 200:
-            return True
         else:
+            # Raise exception when server return response code that isn't recognised
             raise promailgate_client.errors.UnknownResponseError('Unknown status code: %s' % send_r.status_code)
 
     def get_message_status(self, message_id):
@@ -110,14 +125,19 @@ class PromailgateClient(object):
             verify=self._verify_ssl
         )
 
-        if status_r.status_code == 404:
+        # Return the JSON returned forom the server, if the result was successful.
+        if status_r.status_code == 200:
+            return status_r.json()
+
+        # Handle errors from server
+        # - message not found
+        elif status_r.status_code == 404:
             raise promailgate_client.errors.NoSuchMessageError('No such message')
 
+        # - internal server error
         elif status_r.status_code == 500:
             raise promailgate_client.errors.UnknownServerError('Unknown server error')
 
-        elif status_r.status_code == 200:
-            return status_r.json()
-
+        # Handle case where server returns response code that we don't support
         else:
             raise promailgate_client.errors.UnknownResponseError('Unknown status code: %s' % status_r.status_code)

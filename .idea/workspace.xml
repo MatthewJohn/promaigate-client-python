@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cdd0f77c-cb22-499d-99d7-2220e9677300" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/promailgate_client/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/promailgate_client/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_promailgateClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_promailgateClient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+            <state relative-caret-position="195">
+              <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
               </folding>
@@ -382,8 +381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+        <state relative-caret-position="195">
+          <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
           </folding>
