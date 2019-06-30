@@ -2,4 +2,5 @@
 
 . ./build-env/bin/activate
 
-python3 -m unittest discover
+nosetests --with-xunit --xunit-file xunit.xml --with-coverage --cover-xml --cover-xml-file coverage.xml --cover-erase
+
