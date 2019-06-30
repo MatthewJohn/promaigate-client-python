@@ -154,10 +154,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'http://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_1, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
             )
 
         # Test https endpoint
@@ -173,10 +176,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'https://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_1, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
             )
 
         # Test with SSL no verify
@@ -192,10 +198,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'https://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_2, test_recipient_2
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=False
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_2, "recipient": test_recipient_2,
+                 "data": {}, "return_id": False}
             )
 
         # Test with default API key
@@ -211,10 +220,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'https://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_3, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_3, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
             )
 
         # Test with default and send-specific API key
@@ -230,10 +242,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'http://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_2, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_2, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
             )
 
         # Test with URL
@@ -249,10 +264,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'http://test-endpoint:1534/api/message/send',
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
-                    test_valid_api_key_2, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_2, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
             )
 
         # Test return ID
@@ -268,10 +286,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, test_message_id)
             mocked_request.assert_called_once_with(
                 'https://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": true}' % (
-                    test_valid_api_key_1, test_recipient_1
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": True}
             )
 
         # Test with send error
@@ -299,10 +320,13 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
                 'https://%s/api/message/send' % test_hostname,
-                data='{"api_key": "%s", "recipient": "%s", "data": %s, "return_id": false}' % (
-                    test_valid_api_key_1, test_recipient_1, dumps(test_message_data_1)
-                ),
+                data=mock.ANY,
                 headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": test_message_data_1, "return_id": False}
             )
 
         # Test no API key provided
@@ -332,7 +356,6 @@ class TestPromailgateClient(TestCase):
 
             # Ensure that API wal not called
             mocked_request.assert_not_called()
-
 
     def test_get_message_status(self):
         """Test get_message_status"""

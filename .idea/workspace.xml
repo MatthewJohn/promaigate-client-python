@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdd0f77c-cb22-499d-99d7-2220e9677300" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/promailgate_client/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/promailgate_client/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test_promailgateClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_promailgateClient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="284" column="81" selection-start-line="284" selection-start-column="81" selection-end-line="284" selection-end-column="81" />
+            <state relative-caret-position="242">
+              <caret line="358" selection-start-line="358" selection-end-line="358" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
                 <element signature="e#515#996#0" />
@@ -377,8 +375,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="284" column="81" selection-start-line="284" selection-start-column="81" selection-end-line="284" selection-end-column="81" />
+        <state relative-caret-position="242">
+          <caret line="358" selection-start-line="358" selection-end-line="358" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
             <element signature="e#515#996#0" />
