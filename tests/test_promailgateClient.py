@@ -17,34 +17,60 @@ from promailgate_client.errors import *
 class TestPromailgateClient(TestCase):
     """Test PromailgateClient class"""
 
+    def test__get_url(self):
+        """Test _get_url method"""
+        client = PromailgateClient(
+            host='test.endpoint.localhost',
+            use_ssl=True,
+            verify_ssl=True,
+            default_api_key=None)
+        self.assertEqual(client._get_url(), None)
+
+        client = PromailgateClient(
+            url='http://test.localhost',
+            use_ssl=True,
+            verify_ssl=True,
+            default_api_key=None)
+        self.assertEqual(client._get_url(), 'http://test.localhost')
+
     def test__get_base_url(self):
         """Test _get_base_url method"""
         # Test SSL connection
         client = PromailgateClient(
-            promailgate_host='test.endpoint.localhost',
+            host='test.endpoint.localhost',
             use_ssl=True,
             verify_ssl=True,
             default_api_key=None)
 
         with mock.patch.object(client, '_get_proto', return_value='test_proto'):
-            with mock.patch.object(client, '_get_promailgate_host', return_value='test_hostname'):
+            with mock.patch.object(client, '_get_host', return_value='test_hostname'):
                 self.assertEqual(client._get_base_url(), 'test_proto://test_hostname')
 
-    def test__get_promailgate_host(self):
-        """Test _get_promailgate_host method"""
+        # Test SSL connection
         client = PromailgateClient(
-            promailgate_host='TestHostnameHere',
+            host='test.endpoint.localhost',
             use_ssl=True,
             verify_ssl=True,
             default_api_key=None)
 
-        self.assertEqual(client._get_promailgate_host(), 'TestHostnameHere')
+        with mock.patch.object(client, '_get_url', return_value='override://by.url.param'):
+            self.assertEqual(client._get_base_url(), 'override://by.url.param')
+
+    def test__get_promailgate_host(self):
+        """Test _get_promailgate_host method"""
+        client = PromailgateClient(
+            host='TestHostnameHere',
+            use_ssl=True,
+            verify_ssl=True,
+            default_api_key=None)
+
+        self.assertEqual(client._get_host(), 'TestHostnameHere')
 
     def test__get_proto(self):
         """Test _get_proto method"""
         # Test SSL connection
         client = PromailgateClient(
-            promailgate_host='Test',
+            host='Test',
             use_ssl=True,
             verify_ssl=True,
             default_api_key=None)
@@ -94,12 +120,10 @@ class TestPromailgateClient(TestCase):
             else:
                 raise Exception('Unknown endpoint')
 
-            return MockResponse(None, 404)
-
         with mock.patch('requests.get', side_effect=mocked_requests_get):
             # Test http endpoint
             client = PromailgateClient(
-                promailgate_host=test_hostname,
+                host=test_hostname,
                 use_ssl=False,
                 verify_ssl=True,
                 default_api_key=None
@@ -109,7 +133,7 @@ class TestPromailgateClient(TestCase):
             self.assertEqual(test_status, http_message_status)
 
             client = PromailgateClient(
-                promailgate_host=test_hostname,
+                host=test_hostname,
                 use_ssl=True,
                 verify_ssl=True,
                 default_api_key=None

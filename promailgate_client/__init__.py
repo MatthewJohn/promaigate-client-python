@@ -13,27 +13,39 @@ from promailgate_client.errors import *
 class PromailgateClient(object):
 
     def __init__(
-            self, promailgate_host,
+            self,
+            host=None,
+            url=None,
             use_ssl=True,
             verify_ssl=True,
             default_api_key=None):
         """Setup variables"""
-        self._promailgate_host = promailgate_host
+        self._host = host
+        self._url = url
         self._use_ssl = use_ssl
         self._verify_ssl = verify_ssl
         self._default_api_key = default_api_key
 
-    def _get_promailgate_host(self):
-        """Obtain hostname of promailgate host"""
-        return self._promailgate_host
+    def _get_url(self):
+        """Return the user-specified URL.
+        Note: only works if user has supplied URL and not host"""
+        return self._url
+
+    def _get_host(self):
+        """Return the user-specified host.
+        Note: only works if user has supplied host and not URL"""
+        return self._host
 
     def _get_proto(self):
-        """Obtain protocol for connection"""
+        """Obtain protocol for connection
+        Note: only works if user has supplied host and not URL"""
         return 'https' if self._use_ssl else 'http'
 
     def _get_base_url(self):
         """Return base URL of the endpoint"""
-        return '%s://%s' % (self._get_proto(), self._get_promailgate_host())
+        if self._get_url():
+            return self._get_url()
+        return '%s://%s' % (self._get_proto(), self._get_host())
 
     def send_email(self, recipient, api_key=None, data=None, return_id=True):
         """Send an email using the API."""
