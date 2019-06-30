@@ -69,12 +69,12 @@ class PromailgateClient(object):
         send_r = requests.post(
             '%s/api/message/send' % self._get_base_url(),
             headers={'Content-type': 'application/json'},
-            data={
+            data=dumps({
                 'api_key': api_key,
                 'recipient': recipient,
                 'data': data,
                 'return_id': return_id
-            },
+            }),
             verify=self._verify_ssl
         )
 
@@ -84,10 +84,16 @@ class PromailgateClient(object):
             promailgate_client.errors.InvalidAPIKeyError('Invalid API key')
         elif send_r.status_code == 400:
             # Send Error
-            raise promailgate_client.errors.SendError('Send error: %s' % send_r.json()['Reason'])
+            error = 'No error provided'
+            if 'Reason' in send_r.json():
+                error = send_r.json()['Reason']
+            elif 'message' in send_r.json():
+                error = send_r.json()['message']
+            raise promailgate_client.errors.SendError('Send error: %s' % error)
+
         elif send_r.status_code == 500:
             # Unknown server error
-            promailgate_client.errors.UnknownSendError('Server error: %s' % send_r.json()['Reason'])
+            raise promailgate_client.errors.UnknownSendError('Internal server error')
 
         if send_r.status_code == 201:
             return send_r.json()['message_id']

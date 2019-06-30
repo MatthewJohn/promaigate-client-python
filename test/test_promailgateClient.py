@@ -4,6 +4,7 @@
 #  Proprietary and confidential
 #  Written by Matt Comben <matthew@dockstudios.co.uk>, 6/2019
 
+from json import loads, dumps
 from unittest import mock, TestCase, skip
 
 from promailgate_client import PromailgateClient
@@ -91,10 +92,13 @@ class TestPromailgateClient(TestCase):
         test_valid_api_key_3 = 'asdfghjkl'
         test_recipient_1 = 'alice@example.com'
         test_recipient_2 = 'bob@examples.co.uk'
+        test_unsub_recipient = 'unsubby@example.com'
+        test_server_error_recp = 'int-error@example.com'
+        test_unknown_response_recp = 'unknown-resp@example.com'
+        # Can't use multiple keys in this, as the dict->str will use a random
+        # ordering
         test_message_data_1 = {
-            'first_name': 'Bob',
-            'surname': 'Smith',
-            'language': 'Promailgatish'
+            'first_names': ['Bob', 'cameron', {'inner': 123}]
         }
         test_message_id = 'test-message-ide-here-1234556'
 
@@ -119,11 +123,20 @@ class TestPromailgateClient(TestCase):
             if args[0] in ['http://%s/api/message/send' % test_hostname,
                            'https://%s/api/message/send' % test_hostname,
                            'http://test-endpoint:1534/api/message/send']:
-                print(kwargs['data'])
-                if kwargs['data']['return_id']:
-                    return MockResponse({'Status': 'OK', 'message_id': test_message_id}, 201)
+
+                if loads(kwargs['data'])['recipient'] == test_unsub_recipient:
+                    return MockResponse({'status': 'Error', 'Reason': 'Recipient has unsubscribed'}, 400)
+
+                if loads(kwargs['data'])['recipient'] == test_server_error_recp:
+                    return MockResponse({'status': 'Error', 'Reason': 'Internal Server error'}, 500)
+
+                if loads(kwargs['data'])['recipient'] == test_unknown_response_recp:
+                    return MockResponse({'status': 'Error', 'Reason': 'Wut'}, 123)
+
+                if loads(kwargs['data'])['return_id']:
+                    return MockResponse({'status': 'OK', 'message_id': test_message_id}, 201)
                 else:
-                    return MockResponse({'Status': 'OK'}, 200)
+                    return MockResponse({'status': 'OK'}, 200)
 
             else:
                 raise Exception('Unknown endpoint')
@@ -188,7 +201,7 @@ class TestPromailgateClient(TestCase):
         # Test with default API key
         client = PromailgateClient(
             host=test_hostname,
-            use_ssl=False,
+            use_ssl=True,
             verify_ssl=True,
             default_api_key=test_valid_api_key_3
         )
@@ -197,7 +210,7 @@ class TestPromailgateClient(TestCase):
                                        data={})
             self.assertEqual(send_r, True)
             mocked_request.assert_called_once_with(
-                'http://%s/api/message/send' % test_hostname,
+                'https://%s/api/message/send' % test_hostname,
                 data='{"api_key": "%s", "recipient": "%s", "data": {}, "return_id": false}' % (
                     test_valid_api_key_3, test_recipient_1
                 ),
@@ -261,31 +274,36 @@ class TestPromailgateClient(TestCase):
                 headers={'Content-type': 'application/json'}, verify=True
             )
 
-
         # Test with send error
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            with self.assertRaises(promailgate_client.errors.SendError):
+                send_r = client.send_email(recipient=test_unsub_recipient, return_id=True,
+                                           data={}, api_key=test_valid_api_key_1)
 
         # Test with internal server error
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            with self.assertRaises(promailgate_client.errors.UnknownSendError):
+                send_r = client.send_email(recipient=test_server_error_recp, return_id=True,
+                                           data={}, api_key=test_valid_api_key_1)
 
         # Test with unknown response code
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            with self.assertRaises(promailgate_client.errors.UnknownResponseError):
+                send_r = client.send_email(recipient=test_unknown_response_recp, return_id=True,
+                                           data={}, api_key=test_valid_api_key_1)
 
         # Test with data
-
-        #
-        # # Check SSL no-verify
-        # client = PromailgateClient(
-        #     host=test_hostname,
-        #     use_ssl=True,
-        #     verify_ssl=False,
-        #     default_api_key=None
-        # )
-        # with mock.patch('requests.get', side_effect=mocked_requests_get) as mocked_request:
-        #     test_status = client.get_message_status(https_working_message_id)
-        #     self.assertEqual(test_status, https_message_status)
-        #     mocked_request.assert_called_once_with(
-        #         'https://%s/api/message/status/%s' % (test_hostname, https_working_message_id),
-        #         headers={'Content-type': 'application/json'}, verify=False
-        #     )
-
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            send_r = client.send_email(recipient=test_recipient_1, return_id=False,
+                                       data=test_message_data_1, api_key=test_valid_api_key_1)
+            self.assertEqual(send_r, True)
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/send' % test_hostname,
+                data='{"api_key": "%s", "recipient": "%s", "data": %s, "return_id": false}' % (
+                    test_valid_api_key_1, test_recipient_1, dumps(test_message_data_1)
+                ),
+                headers={'Content-type': 'application/json'}, verify=True
+            )
 
         # Test no API key provided
         client = PromailgateClient(

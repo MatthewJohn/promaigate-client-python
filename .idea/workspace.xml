@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdd0f77c-cb22-499d-99d7-2220e9677300" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/promailgate_client/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/promailgate_client/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test_promailgateClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_promailgateClient.py" afterDir="false" />
     </list>
@@ -22,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="71" column="17" lean-forward="true" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
+            <state relative-caret-position="345">
+              <caret line="95" column="60" selection-start-line="95" selection-start-column="60" selection-end-line="95" selection-end-column="60" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
               </folding>
@@ -34,12 +35,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
+            <state relative-caret-position="92">
+              <caret line="284" column="81" selection-start-line="284" selection-start-column="81" selection-end-line="284" selection-end-column="81" />
               <folding>
+                <element signature="e#272#294#0" expanded="true" />
                 <element signature="e#515#996#0" />
                 <element signature="e#1040#1899#0" />
                 <element signature="e#1939#2194#0" />
@@ -75,6 +77,9 @@
       <find>with self.asserrt</find>
       <find>return_</find>
       <find>umps</find>
+      <find>Reason</find>
+      <find>return_id'</find>
+      <find>(kwargs['data']['recipient</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -90,8 +95,8 @@
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/promailgate_client/test_promailgateClient.py" />
         <option value="$PROJECT_DIR$/tests/test_promailgateClient.py" />
-        <option value="$PROJECT_DIR$/test/test_promailgateClient.py" />
         <option value="$PROJECT_DIR$/promailgate_client/__init__.py" />
+        <option value="$PROJECT_DIR$/test/test_promailgateClient.py" />
       </list>
     </option>
   </component>
@@ -346,13 +351,6 @@
     <entry file="file://$PROJECT_DIR$/build.sh" />
     <entry file="file://$PROJECT_DIR$/promailgate_client/test_promailgateClient.py" />
     <entry file="file://$PROJECT_DIR$/tests/test_promailgateClient.py" />
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/promailgate_client/errors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -360,25 +358,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
-          <folding>
-            <element signature="e#515#996#0" />
-            <element signature="e#1040#1899#0" />
-            <element signature="e#1939#2194#0" />
-            <element signature="e#2235#2740#0" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="71" column="17" lean-forward="true" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
+        <state relative-caret-position="345">
+          <caret line="95" column="60" selection-start-line="95" selection-start-column="60" selection-end-line="95" selection-end-column="60" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="284" column="81" selection-start-line="284" selection-start-column="81" selection-end-line="284" selection-end-column="81" />
+          <folding>
+            <element signature="e#272#294#0" expanded="true" />
+            <element signature="e#515#996#0" />
+            <element signature="e#1040#1899#0" />
+            <element signature="e#1939#2194#0" />
+            <element signature="e#2235#2740#0" />
           </folding>
         </state>
       </provider>
