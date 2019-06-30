@@ -4,14 +4,10 @@
 #  Proprietary and confidential
 #  Written by Matt Comben <matthew@dockstudios.co.uk>, 6/2019
 
-import unittest
-from unittest import mock, TestCase
-from unittest import TestCase
-
-import requests
+from unittest import mock, TestCase, skip
 
 from promailgate_client import PromailgateClient
-from promailgate_client.errors import *
+import promailgate_client.errors
 
 
 class TestPromailgateClient(TestCase):
@@ -86,7 +82,7 @@ class TestPromailgateClient(TestCase):
 
         self.assertEqual(client._get_proto(), 'http')
 
-    @unittest.skip('Not yet implemented')
+    @skip('Not yet implemented')
     def test_send_email(self):
         self.fail()
 
@@ -99,6 +95,8 @@ class TestPromailgateClient(TestCase):
         https_working_message_id = '654-https-message-id-here-123'
         https_message_status = {'MessageStatus': 'UNKNOWN_ERROR', 'external_id': 'another-external-id'}
         unknown_message_id = 'this-id-definitely-doesnt-exist'
+        e500_message_id = 'this-raises-a-500'
+        unknown_error_message_id = 'some-other-error'
 
         def mocked_requests_get(*args, **kwargs):
             class MockResponse:
@@ -117,6 +115,12 @@ class TestPromailgateClient(TestCase):
 
             elif args[0] == 'https://%s/api/message/status/%s' % (test_hostname, unknown_message_id):
                 return MockResponse({}, 404)
+
+            elif args[0] == 'https://%s/api/message/status/%s' % (test_hostname, e500_message_id):
+                return MockResponse({}, 500)
+
+            elif args[0] == 'https://%s/api/message/status/%s' % (test_hostname, unknown_error_message_id):
+                return MockResponse({}, 123)
 
             else:
                 raise Exception('Unknown endpoint')
@@ -143,5 +147,15 @@ class TestPromailgateClient(TestCase):
             test_status = client.get_message_status(https_working_message_id)
             self.assertEqual(test_status, https_message_status)
 
-            with self.assertRaises(NoSuchMessageError):
+            # Check error cases
+            #  - Unknown message
+            with self.assertRaises(promailgate_client.errors.NoSuchMessageError):
                 client.get_message_status(unknown_message_id )
+
+            #  - Internal server error
+            with self.assertRaises(promailgate_client.errors.UnknownServerError):
+                client.get_message_status(e500_message_id)
+
+            #  - Unhandled response code
+            with self.assertRaises(promailgate_client.errors.UnknownResponseError):
+                client.get_message_status(unknown_error_message_id)
