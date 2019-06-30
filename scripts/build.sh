@@ -26,7 +26,7 @@ if devpi use ${devpi_server}>/dev/null
 then
    devpi use ${devpi_server}/dockstudios --set-cfg \
     && if [ "x${DEVPI_PASSWORD}" == "x" ]; then devpi login $DEVPI_USERNAME; else devpi login $DEVPI_USERNAME --password=${DEVPI_PASSWORD}; fi \
-    && devpi upload --from-dir --formats='*' ./build-env/dest ./build-env/reqs
+    && devpi use ${devpi_server}/dockstudios && devpi upload --from-dir --formats='*' ./build-env/dest ./build-env/reqs
 else
     echo "No started devpi container found at ${devpi_server}"
 fi
