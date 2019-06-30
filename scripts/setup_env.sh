@@ -14,7 +14,7 @@ pip install -r requirements.txt
 cat > build-env/pip.conf <<'EOF'
 [global]
 timeout = 60
-extra-index-url = http://fare-docker-reg.dock.studios:3141/dockstudios
+extra-index-url = http://fare-docker-reg.dock.studios:3141/root/dockstudios
 
 [install]
 trusted-host = fare-docker-reg.dock.studios
