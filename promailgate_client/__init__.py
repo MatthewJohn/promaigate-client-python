@@ -6,7 +6,7 @@
 from json import dumps
 import requests
 
-from proamilgate_client.errors import *
+from promailgate_client.errors import *
 
 
 class PromailgateClient(object):
