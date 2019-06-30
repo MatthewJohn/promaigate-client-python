@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdd0f77c-cb22-499d-99d7-2220e9677300" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/promailgate_client/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/promailgate_client/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test_promailgateClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_promailgateClient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,11 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1605">
-              <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="62" />
+            <state relative-caret-position="185">
+              <caret line="71" column="17" lean-forward="true" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
               </folding>
@@ -33,11 +34,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="178" column="31" lean-forward="true" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
+            <state relative-caret-position="260">
+              <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
+              <folding>
+                <element signature="e#515#996#0" />
+                <element signature="e#1040#1899#0" />
+                <element signature="e#1939#2194#0" />
+                <element signature="e#2235#2740#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,6 +73,8 @@
       <find>rai</find>
       <find>raise</find>
       <find>with self.asserrt</find>
+      <find>return_</find>
+      <find>umps</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -81,8 +90,8 @@
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/promailgate_client/test_promailgateClient.py" />
         <option value="$PROJECT_DIR$/tests/test_promailgateClient.py" />
-        <option value="$PROJECT_DIR$/promailgate_client/__init__.py" />
         <option value="$PROJECT_DIR$/test/test_promailgateClient.py" />
+        <option value="$PROJECT_DIR$/promailgate_client/__init__.py" />
       </list>
     </option>
   </component>
@@ -149,7 +158,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_get_message_status">
+  <component name="RunManager" selected="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_send_email">
     <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_base_url" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="promailgate-python-client" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -178,20 +187,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_proto" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="promailgate-python-client" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_promailgateClient.TestPromailgateClient.test__get_proto&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_url" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="promailgate-python-client" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -211,22 +206,44 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_pattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_promailgateClient.TestPromailgateClient.test_get_message_status&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test_send_email" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="promailgate-python-client" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_promailgateClient.TestPromailgateClient.test_send_email&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_base_url" />
+      <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_promailgate_host" />
+      <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_url" />
+      <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_get_message_status" />
+      <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_send_email" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_send_email" />
         <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test_get_message_status" />
         <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_base_url" />
         <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_url" />
         <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_promailgate_host" />
-        <item itemvalue="Python tests.Unittests for test_promailgateClient.TestPromailgateClient.test__get_proto" />
       </list>
     </recent_temporary>
   </component>
@@ -244,9 +261,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_promailgateClient_TestPromailgateClient_test__get_base_url - 2019.06.30 at 11h 17m 05s.xml">
-      <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_base_url" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_promailgateClient_TestPromailgateClient_test__get_promailgate_host - 2019.06.30 at 11h 17m 18s.xml">
       <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_promailgate_host" configurationId="tests" />
     </history-entry>
@@ -274,17 +288,20 @@
     <history-entry file="Unittests_for_test_promailgateClient_TestPromailgateClient_test__get_base_url - 2019.06.30 at 14h 25m 40s.xml">
       <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test__get_base_url" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_promailgateClient_TestPromailgateClient_test_send_email - 2019.06.30 at 19h 22m 36s.xml">
+      <configuration name="Unittests for test_promailgateClient.TestPromailgateClient.test_send_email" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="584" y="276" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25344953" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25344953" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298611" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -336,16 +353,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1605">
-          <caret line="110" column="44" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="62" />
-          <folding>
-            <element signature="e#272#294#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/promailgate_client/errors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -355,8 +362,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="178" column="31" lean-forward="true" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
+        <state relative-caret-position="260">
+          <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
+          <folding>
+            <element signature="e#515#996#0" />
+            <element signature="e#1040#1899#0" />
+            <element signature="e#1939#2194#0" />
+            <element signature="e#2235#2740#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/promailgate_client/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="71" column="17" lean-forward="true" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
+          <folding>
+            <element signature="e#272#294#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

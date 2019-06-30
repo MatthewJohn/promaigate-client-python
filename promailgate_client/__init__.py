@@ -56,7 +56,7 @@ class PromailgateClient(object):
         if api_key is None:
             # Check that API key has either been provided in object creation or in this function
             if self._default_api_key is None:
-                promailgate_client.errors.NoApiKeyProvidedError('No API key has been provided')
+                raise promailgate_client.errors.NoApiKeyProvidedError('No API key has been provided')
 
             # Set API key to default, if not provided in function
             api_key = self._default_api_key
@@ -69,12 +69,12 @@ class PromailgateClient(object):
         send_r = requests.post(
             '%s/api/message/send' % self._get_base_url(),
             headers={'Content-type': 'application/json'},
-            data=dumps({
+            data={
                 'api_key': api_key,
                 'recipient': recipient,
                 'data': data,
                 'return_id': return_id
-            }),
+            },
             verify=self._verify_ssl
         )
 
