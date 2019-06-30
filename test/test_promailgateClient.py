@@ -86,6 +86,7 @@ class TestPromailgateClient(TestCase):
 
         self.assertEqual(client._get_proto(), 'http')
 
+    @unittest.skip('Not yet implemented')
     def test_send_email(self):
         self.fail()
 
