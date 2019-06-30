@@ -104,8 +104,6 @@ class TestPromailgateClient(TestCase):
         test_message_id = 'test-message-ide-here-1234556'
 
         def mocked_requests_post(*args, **kwargs):
-            if 'verify_ssl' in kwargs:
-                verify_ssl = kwargs['verify_ssl']
 
             class MockResponse:
                 def __init__(self, json_data, status_code):
@@ -117,6 +115,7 @@ class TestPromailgateClient(TestCase):
 
             # Ensure required arguments are present
             self.assertTrue('data' in kwargs)
+            self.assertTrue('verify' in kwargs)
             self.assertTrue('return_id' in kwargs['data'])
             self.assertTrue('recipient' in kwargs['data'])
             self.assertTrue('api_key' in kwargs['data'])
@@ -172,6 +171,27 @@ class TestPromailgateClient(TestCase):
             host=test_hostname,
             use_ssl=True,
             verify_ssl=True,
+            default_api_key=None
+        )
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            send_r = client.send_email(recipient=test_recipient_1, return_id=False,
+                                       data={}, api_key=test_valid_api_key_1)
+            self.assertEqual(send_r, True)
+            mocked_request.assert_called_once_with(
+                'https://%s/api/message/send' % test_hostname,
+                data=mock.ANY,
+                headers={'Content-type': 'application/json'}, verify=True
+            )
+            self.assertEqual(
+                loads(mocked_request.call_args[1]['data']),
+                {"api_key": test_valid_api_key_1, "recipient": test_recipient_1,
+                 "data": {}, "return_id": False}
+            )
+
+        # Test https endpoint with implicit ssl_verify
+        client = PromailgateClient(
+            host=test_hostname,
+            use_ssl=True,
             default_api_key=None
         )
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
@@ -407,8 +427,6 @@ class TestPromailgateClient(TestCase):
         unknown_error_message_id = 'some-other-error'
 
         def mocked_requests_get(*args, **kwargs):
-            if 'verify_ssl' in kwargs:
-                verify_ssl = kwargs['verify_ssl']
 
             class MockResponse:
                 def __init__(self, json_data, status_code):
@@ -417,6 +435,9 @@ class TestPromailgateClient(TestCase):
 
                 def json(self):
                     return self.json_data
+
+            # Ensure required arguments are present
+            self.assertTrue('verify' in kwargs)
 
             if args[0] == 'http://%s/api/message/status/%s' % (test_hostname, http_working_message_id):
                 return MockResponse(http_message_status, 200)
