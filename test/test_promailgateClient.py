@@ -383,7 +383,6 @@ class TestPromailgateClient(TestCase):
             )
 
         # Test invalid API key
-
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
             with self.assertRaises(promailgate_client.errors.InvalidAPIKeyError):
                 client.send_email(recipient=test_recipient_1, return_id=False,
