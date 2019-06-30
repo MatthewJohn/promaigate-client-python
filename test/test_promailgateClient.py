@@ -95,6 +95,7 @@ class TestPromailgateClient(TestCase):
         test_recipient_2 = 'bob@examples.co.uk'
         test_unsub_recipient = 'unsubby@example.com'
         test_server_error_recp = 'int-error@example.com'
+        test_web_server_error_recp = 'server-error@example.com'
         test_unknown_response_recp = 'unknown-resp@example.com'
         # Can't use multiple keys in this, as the dict->str will use a random
         # ordering
@@ -132,6 +133,12 @@ class TestPromailgateClient(TestCase):
 
                 if loads(kwargs['data'])['recipient'] == test_server_error_recp:
                     return MockResponse({'status': 'Error', 'Reason': 'Internal Server error'}, 500)
+
+                if loads(kwargs['data'])['recipient'] == test_web_server_error_recp:
+                    return MockResponse({
+                        'message': 'The browser (or proxy) sent a request that this server could not understand.'},
+                        500
+                    )
 
                 if loads(kwargs['data'])['recipient'] == test_unknown_response_recp:
                     return MockResponse({'status': 'Error', 'Reason': 'Wut'}, 123)
@@ -329,6 +336,12 @@ class TestPromailgateClient(TestCase):
         with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
             with self.assertRaises(promailgate_client.errors.UnknownSendError):
                 send_r = client.send_email(recipient=test_server_error_recp, return_id=True,
+                                           data={}, api_key=test_valid_api_key_1)
+
+        # Test with internal web-server error
+        with mock.patch('requests.post', side_effect=mocked_requests_post) as mocked_request:
+            with self.assertRaises(promailgate_client.errors.UnknownSendError):
+                send_r = client.send_email(recipient=test_web_server_error_recp, return_id=True,
                                            data={}, api_key=test_valid_api_key_1)
 
         # Test with unknown response code

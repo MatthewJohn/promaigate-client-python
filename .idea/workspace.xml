@@ -36,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="440" selection-start-line="440" selection-end-line="440" />
+            <state relative-caret-position="290">
+              <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
               <folding>
                 <element signature="e#272#294#0" expanded="true" />
                 <element signature="e#515#996#0" />
@@ -84,6 +84,7 @@
       <find>ssl_verify</find>
       <find>verify</find>
       <find>request</find>
+      <find>test_serber_errr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -381,8 +382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_promailgateClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="440" selection-start-line="440" selection-end-line="440" />
+        <state relative-caret-position="290">
+          <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
           <folding>
             <element signature="e#272#294#0" expanded="true" />
             <element signature="e#515#996#0" />
